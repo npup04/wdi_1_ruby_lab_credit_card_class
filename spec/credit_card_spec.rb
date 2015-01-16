@@ -5,7 +5,7 @@ RSpec.describe CreditCard do
   # We use `let` for setting local variables
   let(:card_type) { "Mastercard" }
   let(:name) { "Jason Wharff" }
-  let(:expiration) { "0316" }
+  let(:expiration) { "0416" }
   let(:ccv) { "123" }
   let(:zipcode) { "02169" }
   let(:card_number) { "5555555555554444" }
@@ -64,12 +64,31 @@ RSpec.describe CreditCard do
     end
   end
 
+    # Test the card_number length
+  describe '#current_year' do
+  it 'returns the current year integer' do
+    expect(credit_card.current_year).to be 15
+    end
+  end
+
+  describe '#current_month' do
+  it 'returns the current month integer' do
+    expect(credit_card.current_month).to be 1
+    end
+  end
+
+  describe '#exp_year' do
+  it 'returns the exp month integer' do
+    expect(credit_card.exp_year).to be 15
+    end
+  end
+
   # Test if expiration date is in the future
-  describe '#expiration_date?' do
-    subject(:expiration_date) { CreditCard.new(card_type, name, expiration, ccv, zipcode, card_number)}
-    it 'returns if the expiration_date is in the future' do
+  describe '#exp_valid?' do
+    subject(:exp_valid) { CreditCard.new(card_type, name, expiration, ccv, zipcode, card_number)}
+    it 'returns if the exp_valid is in the future' do
       # expect(credit_card.expiration_date?).to be false
-      expect(credit_card.expiration_date?).to be false
+      expect(credit_card.exp_valid?).to be true
     end
   end
 

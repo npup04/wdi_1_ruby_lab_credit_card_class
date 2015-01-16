@@ -35,14 +35,32 @@ class CreditCard
     @card_number.length
   end
 
-  def expiration_date?
-    current_year = Date.today.strftime("%y").to_i
-    current_month = Date.today.strftime("%m").to_i
-    exp_future_year = 14
-    exp_future_month = 03
-
-    exp_future_year > current_year || (exp_future_year < current_year && exp_future_month > current_month)
+  def current_year
+    @current_year = Date.today.strftime("%y").to_i
   end
+
+  def current_month
+    @current_month = Date.today.strftime("%m").to_i
+  end
+
+  def exp_year
+    @exp_year = Date.parse(@expiration).strftime("%y").to_i
+  end
+
+  def exp_valid?
+    @exp_year > @current_year || @exp_year < @current_year && @exp_month > @current_month
+  end
+
 end
+
+#pry experimentation:
+    # current_year = Date.today.strftime("%y").to_i
+    # current_month = Date.today.strftime("%m").to_i
+
+    # exp_year = Date.parse("Apr 2016").strftime("%y").to_i
+    # exp_month = Date.parse("Apr 2016").strftime("%m").to_i
+
+    # exp_year > current_year || (exp_year < current_year && exp_month > current_month)
+
 # binding.pry
 # puts "---"
